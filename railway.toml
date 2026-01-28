@@ -3,7 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "node node_modules/moltbot/dist/node-host/index.js gateway --port 18789 --host 0.0.0.0"
+# Using the verified entry point for the moltbot package
+startCommand = "node node_modules/moltbot/moltbot.mjs gateway --port 18789 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
