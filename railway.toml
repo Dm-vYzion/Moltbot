@@ -3,6 +3,5 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# If startCommand is empty, Railway uses the Dockerfile CMD
 healthcheckProtocol = "TCP"
 healthcheckTimeout = 300
