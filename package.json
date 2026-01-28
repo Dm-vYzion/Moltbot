@@ -1,5 +1,6 @@
 {
-  "name": "my-bot",
+  "name": "moltbot-gateway",
+  "version": "1.0.0",
   "dependencies": {
     "moltbot": "latest"
   }
