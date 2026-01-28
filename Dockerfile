@@ -4,12 +4,10 @@ RUN apt-get update && apt-get install -y \
   curl bash python3 python3-pip git \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Moltbot globally
 RUN npm install -g moltbot@latest
 
-# Make sure global npm bin dir is on PATH
-# (node:bookworm images usually use /usr/local/bin for globals)
-ENV PATH="/usr/local/bin:/usr/local/sbin:/usr/local/lib/node_modules/.bin:${PATH}"
+# Make npm global binaries (like `moltbot`) visible
+ENV PATH="/usr/local/lib/node_modules/.bin:${PATH}"
 
 WORKDIR /app
 
