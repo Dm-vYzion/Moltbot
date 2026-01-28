@@ -3,8 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# Pointing to the manually created symlink from the Dockerfile
-startCommand = "/usr/local/bin/moltbot gateway --port 18789 --host 0.0.0.0"
+# We point directly to the binary file inside the node_modules folder
+startCommand = "node /usr/local/lib/node_modules/moltbot/dist/node-host/index.js gateway --port 18789 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
