@@ -3,8 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# npx is the "smart" way to run moltbot without knowing the exact folder structure
-startCommand = "npx moltbot gateway --port 18789 --host 0.0.0.0"
+startCommand = "node node_modules/moltbot/dist/node-host/index.js gateway --port 18789 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
