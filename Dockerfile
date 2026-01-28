@@ -10,10 +10,14 @@ WORKDIR /app
 RUN npm install moltbot@latest
 
 ENV NODE_ENV=production
+# Force the bot to store its memory in the Railway volume, not a temp folder
+ENV MOLTBOT_DATA_DIR=/data
+
 RUN mkdir -p /data/.clawdbot /data/workspace
 COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# This finds ANY .js or .mjs file that looks like a main entry point and runs it
-CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) gateway --port 18789 --host 0.0.0.0"]
+# THE CRITICAL CHANGE: 
+# We run 'standalone' instead of 'gateway' so it executes its own logic.
+CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) standalone --port 18789 --host 0.0.0.0"]
