@@ -1,0 +1,6 @@
+{
+  "name": "my-bot",
+  "dependencies": {
+    "moltbot": "latest"
+  }
+}

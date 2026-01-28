@@ -1,8 +1,8 @@
 [build]
-builder = "dockerfile"
-dockerfilePath = "Dockerfile"
+builder = "NIXPACKS"
 
 [deploy]
-# Using TCP healthcheck is safer since it doesn't care about HTTP 200 OK
+# We use 'npx' which is the standard way to run an npm binary without a path
+startCommand = "npx moltbot gateway --port 18789 --host 0.0.0.0"
 healthcheckProtocol = "TCP"
 healthcheckTimeout = 300
