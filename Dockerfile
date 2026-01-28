@@ -14,3 +14,5 @@ RUN mkdir -p /data/.clawdbot /data/workspace
 COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
+
+CMD ["/usr/local/lib/node_modules/moltbot/bin/moltbot", "gateway", "--port", "18789", "--host", "0.0.0.0"]
