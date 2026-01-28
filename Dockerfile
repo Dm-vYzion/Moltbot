@@ -4,8 +4,10 @@ RUN apt-get update && apt-get install -y \
   curl bash python3 python3-pip git \
   && rm -rf /var/lib/apt/lists/*
 
-# 1. Force a fresh install by changing the command slightly
-# 2. Explicitly set the global bin directory
+# This ENV line forces a cache bust for the following layers
+ENV LAST_BUILD_REF="2026-01-27-v1"
+
+# Set the prefix explicitly so symlinks land in /usr/local/bin
 RUN npm config set prefix /usr/local && \
     npm install -g moltbot@latest --unsafe-perm
 
@@ -18,5 +20,4 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 8501
 
-# Fallback CMD
 CMD ["moltbot", "gateway"]
