@@ -3,7 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "moltbot gateway --port 18789 --host 0.0.0.0"
+# Using the absolute path bypasses $PATH resolution issues
+startCommand = "/usr/local/bin/moltbot gateway --port 18789 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"

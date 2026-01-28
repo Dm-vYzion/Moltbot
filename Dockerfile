@@ -4,16 +4,15 @@ RUN apt-get update && apt-get install -y \
   curl bash python3 python3-pip git \
   && rm -rf /var/lib/apt/lists/*
 
-# Force the binary to /usr/local/bin
-RUN npm install -g moltbot@latest --prefix /usr/local
+# Use --unsafe-perm to ensure the binary link is created correctly
+RUN npm install -g moltbot@latest --prefix /usr/local --unsafe-perm
 
 WORKDIR /app
 ENV NODE_ENV=production
-# Add both possible global paths just in case
-ENV PATH="/usr/local/bin:/usr/local/lib/node_modules/.bin:${PATH}"
+# Explicitly add the bin folder to the environment path as a backup
+ENV PATH="/usr/local/bin:${PATH}"
 
 RUN mkdir -p /data/.clawdbot /data/workspace
 COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
-CMD ["moltbot", "gateway"]
