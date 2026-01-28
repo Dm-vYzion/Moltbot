@@ -1,7 +1,9 @@
-FROM node:22-alpine
+FROM node:22-bookworm
 
 # Install dependencies
-RUN apk add --no-cache curl bash python3 py3-pip git
+RUN apt-get update && apt-get install -y \
+  curl bash python3 python3-pip git \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install Moltbot globally
 RUN npm install -g moltbot@latest
