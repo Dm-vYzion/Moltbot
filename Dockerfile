@@ -15,6 +15,5 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# We call the compiled JS file directly with node. 
-# This bypasses the "npm error could not determine executable" loop.
-CMD ["node", "node_modules/moltbot/dist/node-host/index.js", "gateway", "--port", "18789", "--host", "0.0.0.0"]
+# This finds ANY .js or .mjs file that looks like a main entry point and runs it
+CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) gateway --port 18789 --host 0.0.0.0"]
