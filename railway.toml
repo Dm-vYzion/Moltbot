@@ -4,9 +4,7 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "/usr/local/lib/node_modules/moltbot/bin/moltbot gateway --port 18789 --host 0.0.0.0"
-# healthcheckPath = "/"
+healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
-
-CMD ["/usr/local/lib/node_modules/moltbot/bin/moltbot", "gateway", "--port", "18789", "--host", "0.0.0.0"],
