@@ -1,8 +1,8 @@
 [build]
-builder = "NIXPACKS"
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-# We use 'npx' which is the standard way to run an npm binary without a path
-startCommand = "npx moltbot gateway --port 18789 --host 0.0.0.0"
+# Using TCP to bypass "Service Unavailable" healthcheck errors
 healthcheckProtocol = "TCP"
 healthcheckTimeout = 300
