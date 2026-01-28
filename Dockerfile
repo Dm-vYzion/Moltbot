@@ -4,10 +4,11 @@ RUN apt-get update && apt-get install -y \
   curl bash python3 python3-pip git \
   && rm -rf /var/lib/apt/lists/*
 
+# Install moltbot globally
 RUN npm install -g moltbot@latest
 
-# Make npm global binaries (like `moltbot`) visible
-ENV PATH="/usr/local/lib/node_modules/.bin:${PATH}"
+# Update PATH to the standard global bin location
+ENV PATH="/usr/local/bin:${PATH}"
 
 WORKDIR /app
 
@@ -21,4 +22,5 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 8501
 
+# Using the binary name directly
 CMD ["moltbot", "gateway"]
