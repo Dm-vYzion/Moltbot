@@ -5,6 +5,6 @@ dockerfilePath = "Dockerfile"
 [deploy]
 # no startCommand – Railway will use the container CMD
 healthcheckPath = "/"
-healthcheckTimeout = 300
+# healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
