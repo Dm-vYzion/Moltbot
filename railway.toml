@@ -3,6 +3,5 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# Using TCP to bypass "Service Unavailable" healthcheck errors
 healthcheckProtocol = "TCP"
 healthcheckTimeout = 300
