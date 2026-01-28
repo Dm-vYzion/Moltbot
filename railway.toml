@@ -3,8 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# use absolute path here
-startCommand = "/usr/local/lib/node_modules/.bin/moltbot 
+startCommand = "/usr/local/lib/node_modules/.bin/moltbot gateway"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
