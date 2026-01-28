@@ -3,8 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# We're using the path verified in your console check
-startCommand = "node /usr/local/lib/node_modules/moltbot/dist/node-host/index.js gateway --port 18789 --host 0.0.0.0"
+# 'sh -c' forces the system to execute the find command first
+startCommand = "sh -c 'node $(find /usr/local/lib/node_modules/moltbot -name \"index.js\" -o -name \"moltbot.mjs\" | head -n 1) gateway --port 18789 --host 0.0.0.0'"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
