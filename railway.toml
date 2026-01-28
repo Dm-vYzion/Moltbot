@@ -3,8 +3,8 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# This finds the main file and runs it with node, skipping the 'not found' error
-startCommand = "node $(find /usr/local/lib/node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|moltbot' | head -n 1) gateway --port 18789 --host 0.0.0.0"
+# We're using the path verified in your console check
+startCommand = "node /usr/local/lib/node_modules/moltbot/dist/node-host/index.js gateway --port 18789 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
