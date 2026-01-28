@@ -6,17 +6,15 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Install locally
+# Install locally - this creates /app/node_modules/.bin/moltbot
 RUN npm install moltbot@latest
 
 ENV NODE_ENV=production
-# This folder contains the actual 'moltbot' shell script
-ENV PATH="/app/node_modules/.bin:${PATH}"
 
 RUN mkdir -p /data/.clawdbot /data/workspace
 COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# NO BRACKETS. Using a string forces a shell, which honors the PATH.
-CMD moltbot gateway --port 18789 --host 0.0.0.0
+# We call the exact file path. No PATH lookup, no "not found" possible.
+CMD ["/app/node_modules/.bin/moltbot", "gateway", "--port", "18789", "--host", "0.0.0.0"]
