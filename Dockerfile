@@ -10,6 +10,7 @@ WORKDIR /app
 RUN npm install moltbot@latest
 
 ENV NODE_ENV=production
+# This is the secret sauce: it makes 'moltbot' a system command
 ENV PATH="/app/node_modules/.bin:${PATH}"
 
 RUN mkdir -p /data/.clawdbot /data/workspace
@@ -17,5 +18,5 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# IMPORTANT: do NOT prefix with "node", do NOT reference /app/moltbot
+# Call the command directly; the PATH now knows where it lives
 CMD ["moltbot", "gateway", "--port", "18789", "--host", "0.0.0.0"]

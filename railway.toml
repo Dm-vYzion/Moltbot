@@ -3,5 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
+# Using TCP healthcheck is safer since it doesn't care about HTTP 200 OK
 healthcheckProtocol = "TCP"
 healthcheckTimeout = 300
