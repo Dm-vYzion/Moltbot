@@ -20,4 +20,4 @@ EXPOSE 18789
 
 # THE CRITICAL CHANGE: 
 # We run 'standalone' instead of 'gateway' so it executes its own logic.
-CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) standalone --port 18789 --host 0.0.0.0 --provider discord"]
+CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) standalone --port 18789 --host 0.0.0.0 --provider discord --model deepseek-chat --debug"]
