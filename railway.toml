@@ -3,7 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "ls /usr/local/bin && which moltbot && moltbot gateway"
+startCommand = "moltbot gateway --port 8501 --host 0.0.0.0"
 healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
