@@ -19,4 +19,4 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 EXPOSE 18789
 
 # Bind to the port Railway provides, defaulting to 18789 locally
-CMD ["sh", "-c", "npx openclaw gateway --port ${PORT:-18789} --host 0.0.0.0"]
+CMD ["sh", "-c", "NODE_OPTIONS='--max_old_space_size=384' npx openclaw gateway --port ${PORT:-18789} --host 0.0.0.0"]
