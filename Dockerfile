@@ -6,11 +6,10 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Install OpenClaw gateway package
+# Initialize a package and install OpenClaw
 RUN npm init -y && npm install openclaw@latest
 
 ENV NODE_ENV=production
-# Persist state/workspace on Railway volume
 ENV OPENCLAW_STATE_DIR=/data/.openclaw
 ENV OPENCLAW_WORKSPACE_DIR=/data/workspace
 
@@ -19,5 +18,5 @@ COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# Simple, explicit start command
-CMD ["npx", "openclaw", "gateway", "--port", "18789", "--host", "0.0.0.0"]
+# Bind to the port Railway provides, defaulting to 18789 locally
+CMD ["sh", "-c", "npx openclaw gateway --port ${PORT:-18789} --host 0.0.0.0"]
