@@ -6,18 +6,18 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Install locally
-RUN npm install moltbot@latest
+# Install OpenClaw gateway package
+RUN npm init -y && npm install openclaw@latest
 
 ENV NODE_ENV=production
-# Force the bot to store its memory in the Railway volume, not a temp folder
-ENV MOLTBOT_DATA_DIR=/data
+# Persist state/workspace on Railway volume
+ENV OPENCLAW_STATE_DIR=/data/.openclaw
+ENV OPENCLAW_WORKSPACE_DIR=/data/workspace
 
-RUN mkdir -p /data/.clawdbot /data/workspace
+RUN mkdir -p /data/.openclaw /data/workspace
 COPY AGENTS.md SOUL.md MEMORY.md TOOLS.md /data/workspace/
 
 EXPOSE 18789
 
-# THE CRITICAL CHANGE: 
-# We run 'standalone' instead of 'gateway' so it executes its own logic.
-CMD ["sh", "-c", "node $(find node_modules/moltbot -name '*.js' -o -name '*.mjs' | grep -E 'index|main|moltbot' | head -n 1) standalone --port 18789 --host 0.0.0.0 --provider discord --model deepseek/deepseek-chat:free --debug --force"]
+# Simple, explicit start command
+CMD ["npx", "openclaw", "gateway", "--port", "18789", "--host", "0.0.0.0"]
